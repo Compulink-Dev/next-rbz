@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, ChevronDown } from "lucide-react";
 import Image from "next/image";
 
 type NavItem = {
@@ -23,50 +23,14 @@ const navItems: NavItem[] = [
       {
         label: "About the Bank",
         href: "/about-us",
-        // children: [
-        //   { label: "History", href: "/about/history" },
-        //   { label: "Vision & Mission", href: "/about/vision" },
-        //   { label: "Functions", href: "/about/functions" },
-        //   {
-        //     label: "Legislation",
-        //     children: [
-        //       { label: "Acts", href: "/about/legislation/acts" },
-        //       {
-        //         label: "Statutory Instruments",
-        //         href: "/about/legislation/statutory-instruments",
-        //       },
-        //     ],
-        //   },
-        //   { label: "Subsidiaries", href: "/about/subsidiaries" },
-        // ],
       },
       {
         label: "Divisions",
         href: "/about-us/divisions",
-        // children: [
-        //   {
-        //     label: "Bank Supervision",
-        //     href: "/about/divisions/bank-supervision",
-        //   },
-        //   {
-        //     label: "Economic Research & Policy",
-        //     href: "/about/divisions/economic-research",
-        //   },
-        // ],
       },
       {
         label: "Coporate Governance",
         href: "/about-us/coporate-governance",
-        // children: [
-        //   {
-        //     label: "Bank Supervision",
-        //     href: "/about/divisions/bank-supervision",
-        //   },
-        //   {
-        //     label: "Economic Research & Policy",
-        //     href: "/about/divisions/economic-research",
-        //   },
-        // ],
       },
     ],
   },
@@ -84,11 +48,57 @@ const navItems: NavItem[] = [
     label: "Regulation",
     children: [
       { label: "Bank Supervision", href: "/regulation/bank-supervision" },
+      {
+        label: "Capital Flows Management",
+        href: "/regulation/capital-flow-management",
+      },
     ],
   },
-  { label: "Research & Statistics", href: "/research" },
-  { label: "Publications", href: "/publications" },
-  { label: "Financial Markets", href: "/financial-markets" },
+  {
+    label: "Research & Statistics",
+    children: [
+      { label: "Statistics", href: "/research/statistics" },
+      { label: "Economic Reaserch", href: "/research/economic-research" },
+    ],
+  },
+  {
+    label: "Financial Inclusion",
+    children: [
+      { label: "Financial Inclusion", href: "/financial-inclusion/statistics" },
+      {
+        label: "Credit Registry",
+        href: "/financial-inclusion/credit-registry",
+      },
+      {
+        label: "Collateral Registry",
+        href: "/financial-inclusion/collateral-registry",
+      },
+      { label: "Basel Il & III", href: "/financial-inclusion/basell&III" },
+    ],
+  },
+  {
+    label: "Publications",
+    children: [
+      { label: "Publications", href: "/publication-notices/publications" },
+      {
+        label: "Notices",
+        href: "/publication-notices/notices",
+      },
+    ],
+  },
+  {
+    label: "Financial Markets",
+    children: [
+      {
+        label: "National Payment System",
+        href: "/financial-markets/national-payment-system",
+      },
+      {
+        label: "Foreign Exchange Auction Trading System",
+        href: "/financial-markets/foreign-exchange-auction-trading-system",
+      },
+    ],
+  },
   { label: "Contact Us", href: "/contact" },
 ];
 
@@ -97,14 +107,14 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:py-4">
+      <div className="flex items-center justify-between px-4 py-3 md:py-4">
         {/* Logo */}
         <Link href="/" className="text-xl font-bold text-blue-900">
           <Image alt="" src="/rbz_mobile.gif" width={60} height={60} />
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex space-x-6">
+        <nav className="hidden lg:flex space-x-6">
           {navItems.map((item) =>
             item.children ? (
               <DesktopDropdown key={item.label} item={item} />
@@ -121,7 +131,7 @@ export default function Header() {
         </nav>
 
         {/* Mobile Menu */}
-        <div className="md:hidden">
+        <div className="lg:hidden overflow-auto">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
@@ -131,13 +141,6 @@ export default function Header() {
             <SheetContent side="right" className="p-0 w-72">
               <div className="flex items-center justify-between px-4 py-3 border-b">
                 <span className="text-lg font-semibold">RBZ</span>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <X className="h-6 w-6" />
-                </Button>
               </div>
               <MobileNav items={navItems} close={() => setIsOpen(false)} />
             </SheetContent>

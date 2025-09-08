@@ -5,13 +5,11 @@ import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
   Building2,
   Target,
   BarChart3,
   Scale,
-  FileText,
   Download,
   ArrowLeft,
   ExternalLink,
@@ -168,14 +166,14 @@ function FunctionsContent() {
         </CardHeader>
         <CardContent>
           <p className="mb-6">
-            The Bank is responsible for the formulation and implementation of
+            {`  The Bank is responsible for the formulation and implementation of
             monetary policy, directed at ensuring low and stable inflation
             levels. A further core function of the Bank is to maintain a stable
             banking system through its supervisory and lender of last resort
             functions. Other secondary roles of the Bank include the management
             of the country's gold and foreign exchange assets. The bank is the
             sole issuer of currency and acts as banker and advisor to
-            Government.
+            Government.`}
           </p>
 
           <div className="space-y-4">

@@ -3,6 +3,9 @@
 import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ArrowLeft, Building2 } from "lucide-react";
 
 const divisions = [
   {
@@ -116,57 +119,70 @@ const divisions = [
 
 export default function Divisions() {
   return (
-    <div className="container mx-auto px-4 py-12">
-      {/* Page Header */}
-      <motion.h1
-        className="text-4xl font-bold text-center mb-8"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        Divisions
-      </motion.h1>
-
-      <motion.p
-        className="text-center text-muted-foreground max-w-2xl mx-auto mb-12"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.6 }}
-      >
-        Explore the key divisions of the Reserve Bank. Switch between tabs to
-        view details.
-      </motion.p>
-
-      {/* Tabs */}
-      <Tabs defaultValue={divisions[0].id} className="w-full">
-        <TabsList className="flex flex-wrap justify-center gap-2 mb-8">
-          {divisions.map((division) => (
-            <TabsTrigger key={division.id} value={division.id}>
-              {division.title}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-
-        {divisions.map((division, index) => (
-          <TabsContent key={division.id} value={division.id}>
-            <motion.div
-              key={division.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 * index, duration: 0.5 }}
+    <div className="">
+      {/* Header */}
+      <header className="bg-blue-900 text-white py-6">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center gap-4 mb-4">
+            <Button
+              variant="ghost"
+              size="sm"
+              asChild
+              className="text-white hover:bg-white/10"
             >
-              <Card className="shadow-lg">
-                <CardHeader>
-                  <CardTitle>{division.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="prose max-w-none">
-                  {division.description}
-                </CardContent>
-              </Card>
-            </motion.div>
-          </TabsContent>
-        ))}
-      </Tabs>
+              <Link href="/" className="flex items-center gap-2">
+                <ArrowLeft className="h-4 w-4" />
+                Back to Home
+              </Link>
+            </Button>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="bg-white/10 p-3 rounded-full">
+              <Building2 className="h-8 w-8" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold"> Divisions</h1>
+              <p className="text-blue-200">
+                Explore the key divisions of the Reserve Bank. Switch between
+                tabs to view details.
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div className="container mx-auto px-4 py-12">
+        {/* Tabs */}
+        <Tabs defaultValue={divisions[0].id} className="w-full">
+          <TabsList className="flex flex-wrap justify-center gap-2 mb-8">
+            {divisions.map((division) => (
+              <TabsTrigger key={division.id} value={division.id}>
+                {division.title}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+
+          {divisions.map((division, index) => (
+            <TabsContent key={division.id} value={division.id}>
+              <motion.div
+                key={division.id}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * index, duration: 0.5 }}
+              >
+                <Card className="shadow-lg">
+                  <CardHeader>
+                    <CardTitle>{division.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="prose max-w-none">
+                    {division.description}
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </TabsContent>
+          ))}
+        </Tabs>
+      </div>
     </div>
   );
 }

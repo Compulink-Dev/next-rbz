@@ -1,40 +1,22 @@
 "use client";
 // app/(frontend)/page.tsx
-import { Suspense } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import {
   Banknote,
   BarChart3,
-  Calendar,
   ChartNoAxesCombined,
-  Clock,
   DollarSign,
   Download,
   FileText,
   Mail,
   MapPin,
   Phone,
-  Search,
 } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
+
 // import { getHomePageData } from "@/lib/payload/api";
 import { motion } from "framer-motion";
 
@@ -67,7 +49,7 @@ function HeroSection() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-white text-white hover:bg-white/10"
+                className="border-white text-blue-900 hover:bg-blue-900/10"
               >
                 <Link href="/about">About Us</Link>
               </Button>
