@@ -131,14 +131,14 @@ export default function Header() {
         </nav>
 
         {/* Mobile Menu */}
-        <div className="lg:hidden overflow-auto">
+        <div className="lg:hidden ">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="p-0 w-72">
+            <SheetContent side="right" className="p-0 w-72 overflow-auto">
               <div className="flex items-center justify-between px-4 py-3 border-b">
                 <span className="text-lg font-semibold">RBZ</span>
               </div>

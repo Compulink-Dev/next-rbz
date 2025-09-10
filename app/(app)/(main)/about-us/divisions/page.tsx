@@ -141,8 +141,8 @@ export default function Divisions() {
               <Building2 className="h-8 w-8" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold"> Divisions</h1>
-              <p className="text-blue-200">
+              <h1 className="text-lg md:text-3xl font-bold"> Divisions</h1>
+              <p className="text-xs md:text-sm text-blue-200">
                 Explore the key divisions of the Reserve Bank. Switch between
                 tabs to view details.
               </p>
@@ -163,7 +163,11 @@ export default function Divisions() {
           </TabsList>
 
           {divisions.map((division, index) => (
-            <TabsContent key={division.id} value={division.id}>
+            <TabsContent
+              key={division.id}
+              value={division.id}
+              className="mt-24 md:mt-0"
+            >
               <motion.div
                 key={division.id}
                 initial={{ opacity: 0, y: 30 }}

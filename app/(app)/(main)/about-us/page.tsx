@@ -472,8 +472,8 @@ export default function AboutPage() {
               <Building2 className="h-8 w-8" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold">About the Bank</h1>
-              <p className="text-blue-200">
+              <h1 className="text-lg md:text-3xl font-bold">About the Bank</h1>
+              <p className="text-xs md:text-sm text-blue-200">
                 Learn about the Reserve Bank of Zimbabwe
               </p>
             </div>
@@ -497,25 +497,27 @@ export default function AboutPage() {
               <TabsTrigger value="subsidiaries">Subsidiaries</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="history">
-              <HistoryContent />
-            </TabsContent>
+            <div className="mt-10 md:mt-0">
+              <TabsContent value="history">
+                <HistoryContent />
+              </TabsContent>
 
-            <TabsContent value="mission">
-              <MissionContent />
-            </TabsContent>
+              <TabsContent value="mission">
+                <MissionContent />
+              </TabsContent>
 
-            <TabsContent value="functions">
-              <FunctionsContent />
-            </TabsContent>
+              <TabsContent value="functions">
+                <FunctionsContent />
+              </TabsContent>
 
-            <TabsContent value="legislation">
-              <LegislationContent />
-            </TabsContent>
+              <TabsContent value="legislation">
+                <LegislationContent />
+              </TabsContent>
 
-            <TabsContent value="subsidiaries">
-              <SubsidiariesContent />
-            </TabsContent>
+              <TabsContent value="subsidiaries">
+                <SubsidiariesContent />
+              </TabsContent>
+            </div>
           </Tabs>
         </div>
       </main>

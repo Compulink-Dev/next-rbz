@@ -100,8 +100,10 @@ export default function StatisticsDashboard() {
                 <Landmark className="h-8 w-8" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold">Statistics Dashboard</h1>
-                <p className="text-blue-200">
+                <h1 className="text-lg md:text-3xl font-bold">
+                  Statistics Dashboard
+                </h1>
+                <p className="text-blue-200 text-xs md:text-sm">
                   Regulating foreign exchange and capital movements
                 </p>
               </div>

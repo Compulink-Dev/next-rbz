@@ -105,7 +105,9 @@ function MonetaryPolicyStatements() {
       className="space-y-6"
     >
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h2 className="text-2xl font-semibold">Monetary Policy Statements</h2>
+        <h2 className="text-lg md:text-2xl font-semibold">
+          Monetary Policy Statements
+        </h2>
         <div className="relative w-full sm:w-64">
           <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
@@ -247,7 +249,7 @@ function MPCStatements() {
       transition={{ duration: 0.5 }}
       className="space-y-6"
     >
-      <h2 className="text-2xl font-semibold">
+      <h2 className="text-lg md:text-2xl font-semibold">
         Monetary Policy Committee Statements
       </h2>
 
@@ -324,8 +326,8 @@ export default function MonetaryPolicyPage() {
               <BarChart3 className="h-8 w-8" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold">Monetary Policy</h1>
-              <p className="text-blue-200">
+              <h1 className="text-lg md:text-3xl font-bold">Monetary Policy</h1>
+              <p className="text-xs md:text-sm text-blue-200">
                 Official statements and policy documents
               </p>
             </div>

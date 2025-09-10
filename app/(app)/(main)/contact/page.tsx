@@ -32,8 +32,8 @@ export default function ContactPage() {
               </Link>
             </Button>
           </div>
-          <h1 className="text-3xl font-bold">Contact Us</h1>
-          <p className="text-blue-200">
+          <h1 className="text-lg md:text-3xl font-bold">Contact Us</h1>
+          <p className="text-blue-200 text-xs md:text-sm">
             Reach out to the Reserve Bank of Zimbabwe
           </p>
         </div>

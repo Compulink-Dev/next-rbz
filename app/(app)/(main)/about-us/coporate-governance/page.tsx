@@ -34,8 +34,10 @@ export default function CorporateGovernance() {
               <Building2 className="h-8 w-8" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold">Corporate Governance</h1>
-              <p className="text-blue-200">
+              <h1 className="text-lg md:text-3xl font-bold">
+                Corporate Governance
+              </h1>
+              <p className="text-xs md:text-sm text-blue-200">
                 Learn about the Reserve Bank of Zimbabwe
               </p>
             </div>
@@ -46,11 +48,9 @@ export default function CorporateGovernance() {
       <div className="container mx-auto px-4 py-10">
         <Tabs value={tab} onValueChange={setTab} className="w-full">
           {/* Tab Buttons */}
-          <TabsList className="grid grid-cols-3 w-full max-w-2xl mx-auto mb-8">
+          <TabsList className="grid grid-cols-2 md:grid-cols-3 w-full max-w-2xl mx-auto mb-8">
             <TabsTrigger value="directors">Board of Directors</TabsTrigger>
-            <TabsTrigger value="committee">
-              Monetary Policy Committee
-            </TabsTrigger>
+            <TabsTrigger value="committee">Monetary Policy</TabsTrigger>
             <TabsTrigger value="management">Executive Management</TabsTrigger>
           </TabsList>
 
@@ -74,7 +74,7 @@ export default function CorporateGovernance() {
                     alt={name}
                     width={400}
                     height={300}
-                    className="w-full h-40 object-cover rounded-t-2xl"
+                    className="w-full h-40 object-contain rounded-t-2xl"
                   />
                   <CardHeader>
                     <CardTitle className="text-lg">{name}</CardTitle>
@@ -104,7 +104,7 @@ export default function CorporateGovernance() {
                     alt={name}
                     width={400}
                     height={300}
-                    className="w-full h-40 object-cover rounded-t-2xl"
+                    className="w-full h-40 object-contain rounded-t-2xl"
                   />
                   <CardHeader>
                     <CardTitle className="text-lg">{name}</CardTitle>
@@ -141,7 +141,7 @@ export default function CorporateGovernance() {
                     alt={name}
                     width={400}
                     height={300}
-                    className="w-full h-40 object-cover rounded-t-2xl"
+                    className="w-full h-40 object-contain rounded-t-2xl"
                   />
                   <CardHeader>
                     <CardTitle className="text-lg">{name}</CardTitle>

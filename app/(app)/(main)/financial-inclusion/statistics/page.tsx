@@ -27,7 +27,7 @@ export default function FinancialInclusion() {
             >
               <Link href="/regulation" className="flex items-center gap-2">
                 <ArrowLeft className="h-4 w-4" />
-                Back to Regulation
+                Back to Finacnial Inclusion
               </Link>
             </Button>
           </div>
@@ -36,10 +36,10 @@ export default function FinancialInclusion() {
               <Landmark className="h-8 w-8" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold">
-                Economic Statistics Research
+              <h1 className="text-lg md:text-3xl font-bold">
+                Fanancial Inclusion
               </h1>
-              <p className="text-blue-200">
+              <p className="text-blue-200 text-xs md:text-sm">
                 Regulating foreign exchange and capital movements
               </p>
             </div>

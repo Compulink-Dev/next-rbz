@@ -389,8 +389,10 @@ export default function CapitalFlowsPage() {
               <Landmark className="h-8 w-8" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold">Capital Flows Management</h1>
-              <p className="text-blue-200">
+              <h1 className="text-lg md:text-3xl font-bold">
+                Capital Flows Management
+              </h1>
+              <p className="text-xs md:text-sm text-blue-200">
                 Regulating foreign exchange and capital movements
               </p>
             </div>

@@ -592,8 +592,10 @@ export default function BankSupervisionPage() {
               <Building className="h-8 w-8" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold">Bank Supervision</h1>
-              <p className="text-blue-200">
+              <h1 className="text-lg md:text-3xl font-bold">
+                Bank Supervision
+              </h1>
+              <p className="text-xs md:text-sm text-blue-200">
                 Regulatory framework and supervisory guidelines
               </p>
             </div>
@@ -641,25 +643,27 @@ export default function BankSupervisionPage() {
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="circulars">
-              <CircularsContent />
-            </TabsContent>
+            <div className="mt-12 md:mt-0">
+              <TabsContent value="circulars">
+                <CircularsContent />
+              </TabsContent>
 
-            <TabsContent value="guidelines">
-              <GuidelinesContent />
-            </TabsContent>
+              <TabsContent value="guidelines">
+                <GuidelinesContent />
+              </TabsContent>
 
-            <TabsContent value="notices">
-              <PublicNoticesContent />
-            </TabsContent>
+              <TabsContent value="notices">
+                <PublicNoticesContent />
+              </TabsContent>
 
-            <TabsContent value="licensing">
-              <LicensingContent />
-            </TabsContent>
+              <TabsContent value="licensing">
+                <LicensingContent />
+              </TabsContent>
 
-            <TabsContent value="legal">
-              <LegalFrameworkContent />
-            </TabsContent>
+              <TabsContent value="legal">
+                <LegalFrameworkContent />
+              </TabsContent>
+            </div>
           </Tabs>
         </div>
       </main>

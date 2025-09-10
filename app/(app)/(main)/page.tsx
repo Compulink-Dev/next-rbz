@@ -9,16 +9,13 @@ import {
   BarChart3,
   ChartNoAxesCombined,
   DollarSign,
-  Download,
   FileText,
-  Mail,
-  MapPin,
-  Phone,
 } from "lucide-react";
 import Link from "next/link";
 
 // import { getHomePageData } from "@/lib/payload/api";
 import { motion } from "framer-motion";
+import NewsSection from "./_components/NewSection";
 
 // Hero Section Component
 function HeroSection() {
@@ -206,75 +203,75 @@ function ExchangeRatesTabs() {
 }
 
 // News and Updates Component
-function NewsSection() {
-  const newsItems = [
-    {
-      title: "Stakeholder Service Charter 2025 - 2029",
-      date: "Sep 2, 2025",
-      category: "Publication",
-      link: "/documents/publications/RBZ_Publications/2025/Stakeholder_Service_Charter_2.09.25__11zon.pdf",
-    },
-    {
-      title: "MEFMI Vacancies: Director Positions",
-      date: "Sep 1, 2025",
-      category: "Notice",
-      link: "/documents/public_notice/2025/MEFMI_Advertisement_for_Vacancies_-Director_Positions_September_2025-updated_version.pdf",
-    },
-    {
-      title: "2024 Annual Report Published",
-      date: "Aug 28, 2025",
-      category: "Report",
-      link: "/documents/ar/2024%20ANNUAL%20REPORT.pdf",
-    },
-    {
-      title: "ZiG Perception and Confidence Survey II",
-      date: "Aug 25, 2025",
-      category: "Survey",
-      link: "https://rbzzigsurvey.com",
-    },
-  ];
+// function NewsSection() {
+//   const newsItems = [
+//     {
+//       title: "Stakeholder Service Charter 2025 - 2029",
+//       date: "Sep 2, 2025",
+//       category: "Publication",
+//       link: "/documents/publications/RBZ_Publications/2025/Stakeholder_Service_Charter_2.09.25__11zon.pdf",
+//     },
+//     {
+//       title: "MEFMI Vacancies: Director Positions",
+//       date: "Sep 1, 2025",
+//       category: "Notice",
+//       link: "/documents/public_notice/2025/MEFMI_Advertisement_for_Vacancies_-Director_Positions_September_2025-updated_version.pdf",
+//     },
+//     {
+//       title: "2024 Annual Report Published",
+//       date: "Aug 28, 2025",
+//       category: "Report",
+//       link: "/documents/ar/2024%20ANNUAL%20REPORT.pdf",
+//     },
+//     {
+//       title: "ZiG Perception and Confidence Survey II",
+//       date: "Aug 25, 2025",
+//       category: "Survey",
+//       link: "https://rbzzigsurvey.com",
+//     },
+//   ];
 
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <FileText className="h-5 w-5" />
-          Latest Updates
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
-          {newsItems.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-              className="p-4 border rounded-lg hover:shadow-md transition-shadow"
-            >
-              <div className="flex justify-between items-start mb-2">
-                <Badge variant="outline">{item.category}</Badge>
-                <span className="text-sm text-muted-foreground">
-                  {item.date}
-                </span>
-              </div>
-              <h3 className="font-semibold mb-2">{item.title}</h3>
-              <Button variant="ghost" size="sm" asChild>
-                <Link href={item.link} className="flex items-center gap-1">
-                  <Download className="h-4 w-4" />
-                  Download
-                </Link>
-              </Button>
-            </motion.div>
-          ))}
-        </div>
-        <Button variant="outline" className="w-full mt-4" asChild>
-          <Link href="/publications-notices">View All Updates</Link>
-        </Button>
-      </CardContent>
-    </Card>
-  );
-}
+//   return (
+//     <Card>
+//       <CardHeader>
+//         <CardTitle className="flex items-center gap-2">
+//           <FileText className="h-5 w-5" />
+//           Latest Updates
+//         </CardTitle>
+//       </CardHeader>
+//       <CardContent>
+//         <div className="space-y-4">
+//           {newsItems.map((item, index) => (
+//             <motion.div
+//               key={index}
+//               initial={{ opacity: 0, y: 10 }}
+//               animate={{ opacity: 1, y: 0 }}
+//               transition={{ duration: 0.3, delay: index * 0.1 }}
+//               className="p-4 border rounded-lg hover:shadow-md transition-shadow"
+//             >
+//               <div className="flex justify-between items-start mb-2">
+//                 <Badge variant="outline">{item.category}</Badge>
+//                 <span className="text-sm text-muted-foreground">
+//                   {item.date}
+//                 </span>
+//               </div>
+//               <h3 className="font-semibold mb-2">{item.title}</h3>
+//               <Button variant="ghost" size="sm" asChild>
+//                 <Link href={item.link} className="flex items-center gap-1">
+//                   <Download className="h-4 w-4" />
+//                   Download
+//                 </Link>
+//               </Button>
+//             </motion.div>
+//           ))}
+//         </div>
+//         <Button variant="outline" className="w-full mt-4" asChild>
+//           <Link href="/publications-notices">View All Updates</Link>
+//         </Button>
+//       </CardContent>
+//     </Card>
+//   );
+// }
 
 // Quick Links Section
 function QuickLinksSection() {
@@ -346,98 +343,6 @@ function QuickLinksSection() {
   );
 }
 
-// Contact Information Component
-function ContactSection() {
-  return (
-    <section className="py-12">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8">
-          Contact Information
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            <div className="bg-blue-100 p-3 rounded-full inline-flex items-center justify-center mb-4">
-              <MapPin className="h-6 w-6 text-blue-700" />
-            </div>
-            <h3 className="font-semibold text-lg mb-2">Headquarters</h3>
-            <p className="text-muted-foreground">
-              80 Samora Machel Avenue
-              <br />
-              P. O. Box 1283, Harare, Zimbabwe
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            <div className="bg-green-100 p-3 rounded-full inline-flex items-center justify-center mb-4">
-              <Phone className="h-6 w-6 text-green-700" />
-            </div>
-            <h3 className="font-semibold text-lg mb-2">Telephone</h3>
-            <p className="text-muted-foreground">
-              +263 0242 703 000
-              <br />
-              +263 867 700 0477
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            <div className="bg-amber-100 p-3 rounded-full inline-flex items-center justify-center mb-4">
-              <Mail className="h-6 w-6 text-amber-700" />
-            </div>
-            <h3 className="font-semibold text-lg mb-2">Email</h3>
-            <p className="text-muted-foreground">info@rbz.co.zw</p>
-          </motion.div>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="mt-12 bg-muted p-6 rounded-lg"
-        >
-          <h3 className="font-semibold text-lg mb-4 text-center">
-            RTGS Operating Hours
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-            <div>
-              <p className="font-medium">Mon - Fri</p>
-              <p className="text-muted-foreground">08:00 - 16:00</p>
-            </div>
-            <div>
-              <p className="font-medium">Sat & Sun</p>
-              <p className="text-muted-foreground">Closed</p>
-            </div>
-            <div>
-              <p className="font-medium">Public Holidays</p>
-              <p className="text-muted-foreground">Closed</p>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-// Footer Component
-
 // Main Home Page Component
 export default function HomePage() {
   // Fetch data from Payload CMS
@@ -451,7 +356,7 @@ export default function HomePage() {
         {/* Financial Indicators Section */}
         <section className="py-12">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 gap-8">
               <div className="lg:col-span-2">
                 <ExchangeRatesTabs />
               </div>
@@ -463,8 +368,6 @@ export default function HomePage() {
         </section>
 
         <QuickLinksSection />
-
-        <ContactSection />
       </main>
     </div>
   );

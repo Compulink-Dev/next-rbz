@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RBZ",
-  description: "RBZ",
+  title: "Reserve Bank of Zimbabwe",
+  description: "Reserve Bank of Zimbabwe",
 };
 
 export default function RootLayout({
