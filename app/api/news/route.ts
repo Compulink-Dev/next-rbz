@@ -9,7 +9,7 @@ export async function GET() {
     })
 
     const data = await payload.find({
-      //@ts-expect-error the news types are nut configured properly
+      //@ts-expect-error the news types are nut configured
       collection: 'news',
       limit: 4,
       sort: '-date',

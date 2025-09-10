@@ -14,6 +14,8 @@ import { News } from './collections/News'
 import { ExchangeRates } from './collections/ExchangeRates'
 import { QuickLinks } from './collections/QuickLinks'
 import { EconomicIndicators } from './collections/EconomicIndicators'
+import { MonetaryPolicyStatements } from './collections/MonetayPolicy'
+
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -31,6 +33,7 @@ export default buildConfig({
     Categories,
     News,
     ExchangeRates,
+    MonetaryPolicyStatements,
     QuickLinks,
     EconomicIndicators
   ],

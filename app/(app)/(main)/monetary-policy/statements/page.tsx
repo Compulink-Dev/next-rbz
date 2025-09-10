@@ -1,7 +1,7 @@
 // app/(frontend)/monetary-policy/page.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -18,72 +18,119 @@ import {
 import Link from "next/link";
 import { motion } from "framer-motion";
 
+// Types for our data
+interface MonetaryPolicyStatement {
+  id: string;
+  title: string;
+  date: string;
+  excerpt: string;
+  fullStatement: {
+    id: string;
+    url: string;
+    filename: string;
+  };
+  atAGlance?: {
+    id: string;
+    url: string;
+    filename: string;
+  };
+  category: "policy" | "mpc";
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface MonetaryPolicyData {
+  docs: MonetaryPolicyStatement[];
+  totalDocs: number;
+  limit: number;
+  totalPages: number;
+  page: number;
+  pagingCounter: number;
+  hasPrevPage: boolean;
+  hasNextPage: boolean;
+  prevPage: number | null;
+  nextPage: number | null;
+}
+
 // Monetary Policy Statements Component
 function MonetaryPolicyStatements() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [statements, setStatements] = useState<MonetaryPolicyStatement[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const itemsPerPage = 4;
 
-  const statements = [
-    {
-      id: 1,
-      title: "2025 Mid-term Monetary Policy Statement",
-      date: "August 7, 2025",
-      excerpt:
-        "In line with the need to ensure that there is policy consistency as the Reserve Bank continues to walk the talk, this Mid-Term Monetary Policy Review Statement restates previously announced measures and introduces complementary measures to buttress and provide further clarity.",
-      fullStatement: "/documents/mps/2025/MPS_7_August_2025.pdf",
-      atAGlance: "/documents/mps/2025/MPS_At_a_Glance_7_August_2025.pdf",
-    },
-    {
-      id: 2,
-      title: "2025 Monetary Policy Statement",
-      date: "February 6, 2025",
-      excerpt:
-        "Greater exchange rate flexibility in the foreign exchange interbank market, anchored by tight monetary conditions, has supported the current stability.",
-      fullStatement: "/documents/mps/2025/MPS_February_06_2025.pdf",
-      atAGlance: "/documents/mps/2025/MPS_At_A_Glance_February_06_2025_.pdf",
-    },
-    {
-      id: 3,
-      title: "2024 Monetary Policy Statement",
-      date: "April 5, 2024",
-      excerpt:
-        "The Reserve Bank is introducing a structured currency which is generally defined as a currency that is pegged to a specific exchange rate or currency basket and backed by a bundle of foreign exchange assets.",
-      fullStatement: "/documents/mps/2024_Monetary_Policy_Statement.pdf",
-      atAGlance:
-        "/documents/mps/2024/2024_Monetary_Policy_Statement_at_a_Glance.pdf",
-    },
-    {
-      id: 4,
-      title: "2023 Mid-Term Monetary Policy Statement",
-      date: "August 9, 2023",
-      excerpt:
-        "The policy measures put in place by the Bank and Government have re-oriented the country onto the right track to macroeconomic stability.",
-      fullStatement:
-        "/documents/mps/2023/Mid-Term_Monetary_Policy_Statement_2023.pdf",
-      atAGlance:
-        "/documents/mps/2023/2023_Mid-Term_Monetary_Policy_Statement_Snap.pdf",
-    },
-    {
-      id: 5,
-      title: "February 2023 Monetary Policy Statement",
-      date: "February 2, 2023",
-      excerpt:
-        "The Bank expects the domestic economic outlook to remain positive notwithstanding uncertainties around the global economic outlook.",
-      fullStatement: "/documents/mps/2023/MPS_February_2023.pdf",
-      atAGlance: "",
-    },
-    {
-      id: 6,
-      title: "2022 Mid-Term Monetary Policy Statement",
-      date: "August 1, 2022",
-      excerpt:
-        "The Bank strongly believes that the current tight monetary policy stance complemented by the strong will by Government will result in exchange rate and price stability.",
-      fullStatement:
-        "/documents/mps/2022/Monetary-Policy-Statement-August-2022-.pdf",
-      atAGlance: "",
-    },
-  ];
+  useEffect(() => {
+    const fetchStatements = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch("/api/monetary-policy?category=policy");
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch monetary policy statements");
+        }
+
+        const data: MonetaryPolicyData = await response.json();
+        console.log("API response:", data);
+        setStatements(data.docs);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "An error occurred");
+        console.error("Error fetching statements:", err);
+
+        // Fallback to sample data if API fails - updated to match new type structure
+        setStatements([
+          {
+            id: "1",
+            title: "2025 Mid-term Monetary Policy Statement",
+            date: "2025-08-07T00:00:00.000Z",
+            excerpt:
+              "In line with the need to ensure that there is policy consistency as the Reserve Bank continues to walk the talk, this Mid-Term Monetary Policy Review Statement restates previously announced measures and introduces complementary measures to buttress and provide further clarity.",
+            fullStatement: {
+              id: "1",
+              url: "/documents/mps/2025/MPS_7_August_2025.pdf",
+              filename: "MPS_7_August_2025.pdf",
+            },
+            atAGlance: {
+              id: "2",
+              url: "/documents/mps/2025/MPS_At_a_Glance_7_August_2025.pdf",
+              filename: "MPS_At_a_Glance_7_August_2025.pdf",
+            },
+            category: "policy",
+            isActive: true,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          },
+          {
+            id: "2",
+            title: "2025 Monetary Policy Statement",
+            date: "2025-02-06T00:00:00.000Z",
+            excerpt:
+              "Greater exchange rate flexibility in the foreign exchange interbank market, anchored by tight monetary conditions, has supported the current stability.",
+            fullStatement: {
+              id: "3",
+              url: "/documents/mps/2025/MPS_February_06_2025.pdf",
+              filename: "MPS_February_06_2025.pdf",
+            },
+            atAGlance: {
+              id: "4",
+              url: "/documents/mps/2025/MPS_At_A_Glance_February_06_2025_.pdf",
+              filename: "MPS_At_A_Glance_February_06_2025_.pdf",
+            },
+            category: "policy",
+            isActive: true,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          },
+        ]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchStatements();
+  }, []);
 
   const filteredStatements = statements.filter(
     (statement) =>
@@ -96,6 +143,57 @@ function MonetaryPolicyStatements() {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
+
+  if (isLoading) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="space-y-6"
+      >
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <h2 className="text-2xl font-semibold">Monetary Policy Statements</h2>
+          <div className="relative w-full sm:w-64">
+            <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Search statements..."
+              className="pl-8"
+              disabled
+            />
+          </div>
+        </div>
+        <div className="flex justify-center items-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+        </div>
+      </motion.div>
+    );
+  }
+
+  if (error && statements.length === 0) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="space-y-6"
+      >
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <h2 className="text-2xl font-semibold">Monetary Policy Statements</h2>
+          <div className="relative w-full sm:w-64">
+            <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Search statements..."
+              className="pl-8"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="text-center py-12 text-red-500">Error: {error}</div>
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
@@ -134,7 +232,13 @@ function MonetaryPolicyStatements() {
                     </h3>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
                       <Calendar className="h-4 w-4" />
-                      <span>{statement.date}</span>
+                      <span>
+                        {new Date(statement.date).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </span>
                     </div>
                     <p className="text-muted-foreground mb-4">
                       {statement.excerpt}
@@ -143,7 +247,7 @@ function MonetaryPolicyStatements() {
                   <div className="flex flex-col sm:flex-row lg:flex-col gap-2 lg:items-end">
                     <Button variant="outline" size="sm" asChild>
                       <Link
-                        href={statement.fullStatement}
+                        href={statement.fullStatement.url}
                         target="_blank"
                         className="flex items-center gap-2"
                       >
@@ -154,7 +258,7 @@ function MonetaryPolicyStatements() {
                     {statement.atAGlance && (
                       <Button variant="ghost" size="sm" asChild>
                         <Link
-                          href={statement.atAGlance}
+                          href={statement.atAGlance.url}
                           target="_blank"
                           className="flex items-center gap-2"
                         >
@@ -212,33 +316,104 @@ function MonetaryPolicyStatements() {
 
 // MPC Statements Component
 function MPCStatements() {
-  const mpcStatements = [
-    {
-      title: "MPC Post Meeting Statement - 26 April 2024",
-      link: "/documents/mps/2024/MPC_-_Monetary_Policy_Committee_Press_Statement_26_April_2024.pdf",
-      size: "147 KB",
-    },
-    {
-      title: "2024 Monetary Policy Statement at a Glance - 5 April 2024",
-      link: "/documents/mps/2024/2024_Monetary_Policy_Statement_at_a_Glance.pdf",
-      size: "350KB",
-    },
-    {
-      title: "MPC Post Meeting Statement - 4 December 2023",
-      link: "/documents/mps/2023/Resolutions_of_the_Monetary_Policy_Committee_Meeting_Held_on_1_December_2023_2.pdf",
-      size: "890 KB",
-    },
-    {
-      title: "MPC Post Meeting Statement - 24 October 2023",
-      link: "/documents/press/2023/October/Press_Statement-_MPC_Resolutions_-_23-10-2023_print_.pdf",
-      size: "194 KB",
-    },
-    {
-      title: "MPC Post Meeting Statement - 28 July 2023",
-      link: "/documents/press/2023/July/Monetary_Policy_Committee_Meeting_-_28_July_2023.pdf",
-      size: "677 KB",
-    },
-  ];
+  const [mpcStatements, setMpcStatements] = useState<MonetaryPolicyStatement[]>(
+    []
+  );
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchMpcStatements = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch("/api/monetary-policy?category=mpc");
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch MPC statements");
+        }
+
+        const data: MonetaryPolicyData = await response.json();
+        setMpcStatements(data.docs);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "An error occurred");
+        console.error("Error fetching MPC statements:", err);
+
+        // Fallback to sample data if API fails - updated to match new type structure
+        setMpcStatements([
+          {
+            id: "1",
+            title: "MPC Post Meeting Statement - 26 April 2024",
+            date: "2024-04-26T00:00:00.000Z",
+            excerpt: "",
+            fullStatement: {
+              id: "5",
+              url: "/documents/mps/2024/MPC_-_Monetary_Policy_Committee_Press_Statement_26_April_2024.pdf",
+              filename:
+                "MPC_-_Monetary_Policy_Committee_Press_Statement_26_April_2024.pdf",
+            },
+            category: "mpc",
+            isActive: true,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          },
+          {
+            id: "2",
+            title: "MPC Post Meeting Statement - 4 December 2023",
+            date: "2023-12-04T00:00:00.000Z",
+            excerpt: "",
+            fullStatement: {
+              id: "6",
+              url: "/documents/mps/2023/Resolutions_of_the_Monetary_Policy_Committee_Meeting_Held_on_1_December_2023_2.pdf",
+              filename:
+                "Resolutions_of_the_Monetary_Policy_Committee_Meeting_Held_on_1_December_2023_2.pdf",
+            },
+            category: "mpc",
+            isActive: true,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          },
+        ]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchMpcStatements();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="space-y-6"
+      >
+        <h2 className="text-2xl font-semibold">
+          Monetary Policy Committee Statements
+        </h2>
+        <div className="flex justify-center items-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+        </div>
+      </motion.div>
+    );
+  }
+
+  if (error && mpcStatements.length === 0) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="space-y-6"
+      >
+        <h2 className="text-2xl font-semibold">
+          Monetary Policy Committee Statements
+        </h2>
+        <div className="text-center py-12 text-red-500">Error: {error}</div>
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
@@ -256,7 +431,7 @@ function MPCStatements() {
           <div className="space-y-4">
             {mpcStatements.map((statement, index) => (
               <motion.div
-                key={index}
+                key={statement.id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -264,14 +439,18 @@ function MPCStatements() {
               >
                 <div className="flex-1">
                   <h3 className="font-medium">{statement.title}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    {new Date(statement.date).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </p>
                 </div>
                 <div className="flex items-center gap-4">
-                  <span className="text-sm text-muted-foreground">
-                    {statement.size}
-                  </span>
                   <Button variant="outline" size="sm" asChild>
                     <Link
-                      href={statement.link}
+                      href={statement.fullStatement.url}
                       target="_blank"
                       className="flex items-center gap-2"
                     >
